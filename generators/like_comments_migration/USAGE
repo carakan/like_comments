@@ -1,0 +1,9 @@
+Description:
+    The migration generator creates a migration to add the comments table to your database and takes no arguments.
+
+Example:
+    ./script/generate like_comments_migration
+	
+	Migration:  db/migrate/add_activities_table.rb
+
+        The Plugin uses Rails Engines, valid for Rails 2.3.2 >=

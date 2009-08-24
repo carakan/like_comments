@@ -1,0 +1,49 @@
+.like-comments, .like-comments .likes, .like-comments .comments{
+    padding:5px;
+}
+.like-comments .likes h5, .like-comments .likes h5 a{
+    font-size:10px;
+}
+.like-comments{
+    padding-top:0;
+    width:605px;
+}
+.like-comments textarea{
+    width:50em;
+    height:3em;
+    clear:both;
+}
+.like-comments p{
+    padding:0;
+    margin:0;
+}
+.like-comments .likes input{
+    border:none;
+    background:none;
+}
+.like-comments .likes input:hover{
+    text-decoration:underline;
+    cursor:pointer;
+}
+.like-comments .likes, .like-comments .comments{
+    margin:5px 0;
+    border:solid 1px #BFBFBF;
+}
+.like-comments .comments .comment{
+    clear:both;
+    padding:5px;
+}
+.like-comments .comments .message{
+    border:1px solid #DFF7FF;
+    float:right;
+    padding:5px;
+    white-space:pre-wrap;
+    width:500px;
+}
+.like-comments .comments .delete-comment{
+    float:right;
+}
+.like-comments .comments .picture, .like-comments .comments .picture img{
+    display:inline-block;
+    padding:0; margin:0;
+}

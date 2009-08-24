@@ -1,0 +1,52 @@
+<div class="like-comments">
+  <h3>Comentarios</h3>
+  <%- if logged_in? -%>
+    <% likes = commentable.like_this(current_user) %>
+    <%- form_for(Comment.new(:type_common => true)) do |f| -%>
+      <%= hidden_field_tag :commentable_type, commentable.class.name  %>
+      <%= hidden_field_tag :commentable_id, commentable.id %>
+      <%= f.hidden_field :type_common, :value => true %>
+      <p>
+        <%= f.label :comment, 'Su commentario' %>
+        <%= f.text_area :comment %>
+      </p>
+      <%= submit_tag('comentar') %>
+    <%- end -%>
+  <%- else -%>
+    <%= likes = nil %>
+  <%- end -%>
+
+  <div class="likes">
+    <%- unless likes -%>
+      <%= "<h5>A #{link_to(pluralize(commentable.likes_count, 'person'))} les gusta esto</h5>" %>
+      <%- if logged_in? -%>
+        <%- form_for(Comment.new(:type_common => false)) do |f| -%>
+          <%= hidden_field_tag :commentable_type, commentable.class.name  %>
+          <%= hidden_field_tag :commentable_id, commentable.id %>
+          <%= f.hidden_field :type_common, :value => false %>
+          <%= submit_tag('Me gusta') %>
+        <%- end -%>
+      <%- end -%>
+    <%- else -%>
+      <%- if commentable.likes_count > 1 -%>
+        <%= "A ti y a #{link_to(pluralize((commentable.likes_count - 1), 'person'))} les gusta esto" %>
+      <%- else -%>
+        A ti te gusta esto.
+      <%- end -%>
+      <%= link_to 'Ya no me gusta', {:controller => 'comments', :action => :destroy, :id => likes.id}, :method => :delete %>
+    <%- end -%>
+  </div>
+
+  <div class="comments">
+    <%= pluralize(commentable.comments_count, 'comentario')  %>
+    <%- commentable.comments.each do |c| -%>
+      <div id="comment-<%= c.id %>" class="comment">
+        <div class="picture">
+          <%= link_user_fb(c.user, :size => "50x50") if c.user %>
+        </div>
+        <div class="message"><%=h c.comment -%><%= "<div class='delete-comment'>#{link_to('Borrar', {:controller => 'comments', :action => :destroy, :id => c.id}, :method => :delete)}</div>"  if current_user && c.user_id == current_user.id  -%></div>
+      </div>
+    <%- end -%>
+    <br class="clear"/>
+  </div>
+</div>
