@@ -1,0 +1,49 @@
+== LikeComments
+
+Likes_comments is a plugin engine for enabled comments and likes a item, similar to facebook.
+
+== Install:
+
+Rails
+
+   * To install as a plugin:
+
+    script/plugin install http://github.com/carakan/like_comments
+
+   * Run /script/generate acts_as_commentable_migration (creates de file migration)
+
+   * (Optional) creates in the model to enabled like_comments the two columns :likes_counter, :comments_count, for example:
+
+    add_column :posts, :comments_count, :integer, :default => 0
+    add_column :posts, :likes_count, :integer, :default => 0
+
+== Usage
+ * Make your ActiveRecord model act as commentable.
+
+ class Model < ActiveRecord::Base
+ 	acts_like_comments
+ end
+
+ * Add a comment to a model instance
+
+ model = Model.new
+ comment = Comment.new
+ comment.comment = 'Some comment'
+ model.comments << comment
+
+ * This plugin is engine enabled, use de partial located in like_comments/app/views/comments/_comments.html.erb
+   and use in the show for element:
+
+   <%= render :partial => '/comments/comments', :locals => {:commentable => @obj} %>
+
+ * This template is overwrite, then copy in the your templates and use it.
+
+== Credits
+
+Juixe - This plugin is heavily influenced by ActsAsCommentable.
+Tog   - Plataform for creates social network.
+
+== More
+
+info: carakan(at)gmail.com
+page: http://carakan.com
